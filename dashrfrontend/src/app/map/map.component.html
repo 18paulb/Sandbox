@@ -4,8 +4,32 @@
       <e-layer [shapeData] = 'shapeData'></e-layer>
   </e-layers>
 -->
+<!--
 <ejs-maps id='rn-container' (load)="load($event)" [zoomSettings]="zoomSettings" style="display:block">
   <e-layers>
     <e-layer [markerSettings]="markerSettings"></e-layer>
  </e-layers>
  </ejs-maps>
+-->
+
+ <h2>Add Order</h2>
+ <form>
+   <label>Latitude: </label>
+   <input type="text" [(ngModel)]="bindLatitude" name="latitude">
+
+   <label>longitude: </label>
+   <input type="text" [(ngModel)]="bindLongitude" name="longitude">
+
+   <label>Name of City: </label>
+   <input type="text" [(ngModel)]="bindName" name="name">
+
+   <label>Company: </label>
+   <input type="text" [(ngModel)]="bindCompany" name="company">
+
+   <label>Price: </label>
+   <input type="text" [(ngModel)]="bindPrice" name="price">
+
+   <button (click)="registerOrder()">Register New Order</button>
+ </form>
+
+ <button (click)="getOrders()">Get Orders</button>

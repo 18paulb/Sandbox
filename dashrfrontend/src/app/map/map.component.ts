@@ -1,10 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 import { Maps, Zoom, ILoadEventArgs, Marker, NavigationLine } from '@syncfusion/ej2-angular-maps';
 import {world_map} from './world-map'
 
+import { Injectable } from '@angular/core';
+import { HttpBackend, HttpParams, HttpClient } from '@angular/common/http';
+
 Maps.Inject(Zoom, Marker, NavigationLine)
+@Injectable()
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -13,14 +18,25 @@ Maps.Inject(Zoom, Marker, NavigationLine)
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  public registerOrderUrl = "http://localhost:8000/register"
+  public getOrdersUrl = "http://localhost:8000/orders"
+
+  public bindLatitude = ""
+  public bindLongitude = ""
+  public bindName = ""
+  public bindCompany = ""
+  public bindPrice = ""
+
+  public orders: object | undefined
 
   ngOnInit(): void {
     this.zoomSettings = {
       enable:true,
       toolbars: ["Zoom", "ZoomIn", "ZoomOut", "Pan", "Reset"],
       zoomFactor: .5,
-      maxZoom: 20
+      maxZoom: 17
 
     }
 
@@ -62,14 +78,12 @@ export class MapComponent implements OnInit {
   }
 
   public shapeData: object = world_map
-
   public zoomSettings:object | undefined
   public centerPosition: object | undefined
   public markerSettings: object | undefined
   public navigationLineSettings: object | undefined
 
   public bingKey = "ApscR-2i8TspsYdQ4QtRVWVVaM08wKQF2yozbQ3e_3BUriw0V5a1OJydo_9SPuF9"
-
 
   public load = (args: ILoadEventArgs) : void => {
 
@@ -82,5 +96,49 @@ export class MapComponent implements OnInit {
       });
 
   };
+
+  public getOrders() {
+
+    let tmpOrders:any = []
+
+    debugger
+
+    this.http.get<any>(this.getOrdersUrl)
+      .subscribe(res => {
+        console.log(res)
+        tmpOrders = res
+      })
+
+    for (let order of tmpOrders) {
+      console.log(order)
+    }
+
+  }
+
+
+  public registerOrder() {
+    /*
+    let params = new HttpParams()
+
+    params.append("latitude", this.bindLatitude)
+    params.append("longitude", this.bindLongitude)
+    params.append("name", this.bindName)
+    params.append("company", this.bindCompany)
+    params.append("price", this.bindPrice)
+    */
+
+    let data = {latitude: this.bindLatitude, longitude: this.bindLongitude, name: this.bindName,
+      company: this.bindCompany, price: this.bindPrice}
+
+    this.http.post<any>(this.registerOrderUrl, data)
+      .subscribe(res => console.log(res))
+
+
+    this.bindLatitude = ""
+    this.bindLongitude = ""
+    this.bindName = ""
+    this.bindCompany = ""
+    this.bindPrice = ""
+  }
 
 }

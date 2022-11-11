@@ -19,5 +19,6 @@ from dashr import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('getorders', views.get_orders, name="getOrders"),
+    path('orders', views.get_orders, name="getOrders"),
+    path('register', views.register_order, name="registerOrder"),
 ]
