@@ -17,6 +17,7 @@ Maps.Inject(Zoom, Marker, NavigationLine)
   styleUrls: ['./map.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class MapComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
@@ -29,6 +30,11 @@ export class MapComponent implements OnInit {
   public bindName = ""
   public bindCompany = ""
   public bindPrice = ""
+
+  public bindRestaurant = ""
+
+  public startingLat = 40.235728
+  public startingLon = -111.653169
 
   public orders: JSON | undefined
 
@@ -87,6 +93,9 @@ export class MapComponent implements OnInit {
     let data = await lastValueFrom(this.http.get<any>(this.getOrdersUrl))
 
     this.markerSettings = []
+
+    let driverPos = {visible: true, height: 25, width: 15, fill: "green", dataSource: [{latitude: this.startingLat, longitude: this.startingLon, name: "Provo"}]}
+    this.markerSettings.push(driverPos)
 
     for (let order of data) {
       console.log(order)
