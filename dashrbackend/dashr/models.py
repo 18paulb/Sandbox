@@ -8,7 +8,7 @@ class Order(models.Model):
     latitude = models.FloatField(blank=False, default=None)
     longitude = models.FloatField(blank=False, default=None)
     price = models.FloatField(blank=False, default=None)
-    #restaurant = models.CharField(max_length=255, default=None)
+    restaurant = models.CharField(max_length=255, default=None)
 
     def __str__(self):
-        return self.company + " Order: " + self.name + " for $" + str(self.price)
+        return self.company + " Order: " + self.name + " for $" + str(self.price) + " from " + self.restaurant

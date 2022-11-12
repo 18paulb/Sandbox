@@ -36,9 +36,10 @@ def register_order(request):
             name = data.get('name')
             company = data.get('company')
             price = data.get('price')
+            restaurant = data.get('restaurant')
 
             Order.objects.create(orderID=id, latitude=float(latitude), longitude=float(longitude),
-                name=name, company=company, price=float(price))
+                name=name, company=company, price=float(price), restaurant=restaurant)
 
             print("Order successfully created")
 

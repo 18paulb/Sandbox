@@ -30,7 +30,6 @@ export class MapComponent implements OnInit {
   public bindName = ""
   public bindCompany = ""
   public bindPrice = ""
-
   public bindRestaurant = ""
 
   public startingLat = 40.235728
@@ -98,19 +97,20 @@ export class MapComponent implements OnInit {
     this.markerSettings.push(driverPos)
 
     for (let order of data) {
+
       console.log(order)
 
       let newJson = null
 
-      if (order.company == "DoorDash") {
+      if (order.company.toLowerCase() == "doordash") {
         newJson = {visible: true, height: 25, width: 15, fill: "blue", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
       }
 
-      if (order.company == "Uber") {
+      if (order.company.toLowerCase() == "uber") {
         newJson = {visible: true, height: 25, width: 15, fill: "black", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
       }
 
-      if (order.company == "GrubHub") {
+      if (order.company.toLowerCase() == "grubhub") {
         newJson = {visible: true, height: 25, width: 15, fill: "red", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
       }
 
@@ -120,8 +120,12 @@ export class MapComponent implements OnInit {
 
   public registerOrder() {
 
+    if (this.bindLatitude == "" || this.bindLongitude == "") {
+      return
+    }
+
     let data = {latitude: this.bindLatitude, longitude: this.bindLongitude, name: this.bindName,
-      company: this.bindCompany, price: this.bindPrice}
+      company: this.bindCompany, price: this.bindPrice, restaurant: this.bindRestaurant}
 
     this.http.post<any>(this.registerOrderUrl, data)
       .subscribe(res => console.log(res))
@@ -131,6 +135,6 @@ export class MapComponent implements OnInit {
     this.bindName = ""
     this.bindCompany = ""
     this.bindPrice = ""
+    this.bindRestaurant = ""
   }
-
 }
