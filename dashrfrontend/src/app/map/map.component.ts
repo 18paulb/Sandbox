@@ -137,4 +137,10 @@ export class MapComponent implements OnInit {
     this.bindPrice = ""
     this.bindRestaurant = ""
   }
+
+  public getDistance(lat1: any, lon1: any, lat2: any, lon2: any) {
+    fetch("http://dev.virtualearth.net/REST/V1/Routes?wp.0=" + lat1 + "," + lon1 + "&wp.1=" + lat2 + "," + lon2 + "&key=" + this.bingKey)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+  }
 }
