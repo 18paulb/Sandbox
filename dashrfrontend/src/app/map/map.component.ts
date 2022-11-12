@@ -7,6 +7,7 @@ import {world_map} from './world-map'
 
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpParams, HttpClient } from '@angular/common/http';
+import { last, lastValueFrom } from 'rxjs';
 
 Maps.Inject(Zoom, Marker, NavigationLine)
 @Injectable()
@@ -29,9 +30,12 @@ export class MapComponent implements OnInit {
   public bindCompany = ""
   public bindPrice = ""
 
-  public orders: object | undefined
+  public orders: JSON | undefined
 
   ngOnInit(): void {
+
+    this.getOrders()
+
     this.zoomSettings = {
       enable:true,
       toolbars: ["Zoom", "ZoomIn", "ZoomOut", "Pan", "Reset"],
@@ -45,27 +49,7 @@ export class MapComponent implements OnInit {
       latitude: 40.24478630014135,
       longitude: -111.64564335092805
     };
-
-    this.markerSettings = [
-      {
-        visible: true,
-        height: 25,
-        width: 15,
-        dataSource: [
-          {
-            latitude: 34.06062,
-            longitude: -118.330491,
-            name: 'California'
-          },
-          {
-            latitude: 40.724546,
-            longitude: -73.850344,
-            name: 'New York'
-          }
-        ]
-      }
-    ];
-
+    /*
     this.navigationLineSettings = [
     {
         visible: true,
@@ -75,12 +59,13 @@ export class MapComponent implements OnInit {
         latitude: [34.06062, 40.724546],
         longitude: [-118.330491, -73.850344]
     }];
+    */
   }
 
   public shapeData: object = world_map
   public zoomSettings:object | undefined
   public centerPosition: object | undefined
-  public markerSettings: object | undefined
+  public markerSettings: any
   public navigationLineSettings: object | undefined
 
   public bingKey = "ApscR-2i8TspsYdQ4QtRVWVVaM08wKQF2yozbQ3e_3BUriw0V5a1OJydo_9SPuF9"
@@ -97,42 +82,40 @@ export class MapComponent implements OnInit {
 
   };
 
-  public getOrders() {
+  public async getOrders() {
 
-    let tmpOrders:any = []
+    let data = await lastValueFrom(this.http.get<any>(this.getOrdersUrl))
 
-    debugger
+    this.markerSettings = []
 
-    this.http.get<any>(this.getOrdersUrl)
-      .subscribe(res => {
-        console.log(res)
-        tmpOrders = res
-      })
-
-    for (let order of tmpOrders) {
+    for (let order of data) {
       console.log(order)
-    }
 
+      let newJson = null
+
+      if (order.company == "DoorDash") {
+        newJson = {visible: true, height: 25, width: 15, fill: "blue", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
+      }
+
+      if (order.company == "Uber") {
+        newJson = {visible: true, height: 25, width: 15, fill: "black", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
+      }
+
+      if (order.company == "GrubHub") {
+        newJson = {visible: true, height: 25, width: 15, fill: "red", dataSource: [{latitude: order.latitude, longitude: order.longitude, name: order.name}]}
+      }
+
+      this.markerSettings.push(newJson)
+    }
   }
 
-
   public registerOrder() {
-    /*
-    let params = new HttpParams()
-
-    params.append("latitude", this.bindLatitude)
-    params.append("longitude", this.bindLongitude)
-    params.append("name", this.bindName)
-    params.append("company", this.bindCompany)
-    params.append("price", this.bindPrice)
-    */
 
     let data = {latitude: this.bindLatitude, longitude: this.bindLongitude, name: this.bindName,
       company: this.bindCompany, price: this.bindPrice}
 
     this.http.post<any>(this.registerOrderUrl, data)
       .subscribe(res => console.log(res))
-
 
     this.bindLatitude = ""
     this.bindLongitude = ""

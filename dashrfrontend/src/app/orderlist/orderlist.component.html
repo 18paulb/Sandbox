@@ -1,0 +1,32 @@
+<ul>
+  <h2>Uber</h2>
+  <li *ngFor="let order of uberOrders">
+    Price: {{order.price}}
+    <br>
+    Location: {{order.name}}
+    <br>
+    <br>
+  </li>
+
+  <br>
+
+  <h2>DoorDash</h2>
+  <li *ngFor="let order of doordashOrders">
+    Price: {{order.price}}
+    <br>
+    Location: {{order.name}}
+    <br>
+    <br>
+  </li>
+
+  <br>
+
+  <h2>GrubHub</h2>
+  <li *ngFor="let order of grubhubOrders">
+    Price: {{order.price}}
+    <br>
+    Location: {{order.name}}
+    <br>
+    <br>
+  </li>
+</ul>

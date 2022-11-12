@@ -11,11 +11,14 @@ import { MapsModule } from '@syncfusion/ej2-angular-maps'
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
+import { OrderlistComponent } from './orderlist/orderlist.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    OrderlistComponent
   ],
   imports: [
     BrowserModule,
