@@ -1,0 +1,12 @@
+<!--
+<ejs-maps id='rn-container' (load)="load($event)" [zoomSettings]="zoomSettings" height="600px" width="1200px" style="display:block;">
+  <e-layers>
+    <e-layer [markerSettings]="markerSettings"></e-layer>
+ </e-layers>
+ </ejs-maps>
+-->
+<button (click)="getRoute(wendysLat, wendysLon)">Route</button>
+
+<h1>Predicted Earnings: {{predictedEarnings}}</h1>
+<h1>Predicted Time: {{predictedTime}}</h1>
+<h1>Distance Travelled: {{distanceTravelled}}</h1>
