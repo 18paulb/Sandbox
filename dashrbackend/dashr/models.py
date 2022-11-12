@@ -10,4 +10,4 @@ class Order(models.Model):
     price = models.FloatField(blank=False, default=None)
 
     def __str__(self):
-        return "Order: " + self.name + " for $" + str(self.price)
+        return self.company + " Order: " + self.name + " for $" + str(self.price)

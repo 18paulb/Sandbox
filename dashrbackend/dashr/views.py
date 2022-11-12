@@ -1,10 +1,13 @@
-from django.shortcuts import render
 import json
-
-import string, random
+import random
+import string
 
 from django.http import HttpResponse
+from django.shortcuts import render
+
 from .models import Order
+
+
 # Create your views here.
 def hello(request):
     return 0
