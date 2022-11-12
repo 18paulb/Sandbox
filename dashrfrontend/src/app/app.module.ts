@@ -12,13 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 import { OrderlistComponent } from './orderlist/orderlist.component';
+import { SuggestedrouteComponent } from './suggestedroute/suggestedroute.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    OrderlistComponent
+    OrderlistComponent,
+    SuggestedrouteComponent
   ],
   imports: [
     BrowserModule,

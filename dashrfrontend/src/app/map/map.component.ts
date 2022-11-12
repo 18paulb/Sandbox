@@ -54,17 +54,6 @@ export class MapComponent implements OnInit {
       latitude: 40.24478630014135,
       longitude: -111.64564335092805
     };
-    /*
-    this.navigationLineSettings = [
-    {
-        visible: true,
-        color: 'blue',
-        width: 5,
-        angle: 0.1,
-        latitude: [34.06062, 40.724546],
-        longitude: [-118.330491, -73.850344]
-    }];
-    */
   }
 
   public shapeData: object = world_map
@@ -98,7 +87,7 @@ export class MapComponent implements OnInit {
 
     for (let order of data) {
 
-      console.log(order)
+      //console.log(order)
 
       let newJson = null
 
@@ -136,11 +125,5 @@ export class MapComponent implements OnInit {
     this.bindCompany = ""
     this.bindPrice = ""
     this.bindRestaurant = ""
-  }
-
-  public getDistance(lat1: any, lon1: any, lat2: any, lon2: any) {
-    fetch("http://dev.virtualearth.net/REST/V1/Routes?wp.0=" + lat1 + "," + lon1 + "&wp.1=" + lat2 + "," + lon2 + "&key=" + this.bingKey)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
   }
 }
