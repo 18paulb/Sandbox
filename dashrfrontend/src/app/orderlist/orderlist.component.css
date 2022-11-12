@@ -1,6 +1,42 @@
-uber-section {
-  background-color: green;
+body {
+    margin: 0;
+    padding: 0;
 }
-.uber-section li{
-  background-color: green;
+
+ul {
+    list-style-type: none;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul h2 {
+    margin: 0;
+    padding-bottom: 1rem;
+}
+
+li {
+    padding-left: 3rem;
+}
+
+.order-list {
+    padding: 0;
+    margin: 0;
+}
+
+.company-section h2{
+    padding: 1rem 2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.uber-section h2{
+  background-color: #06C167;
+}
+
+.doordash-section h2{
+    background-color: rgb(246, 246, 246);
+    color: #ea3440;
+}
+
+.grubhub-section h2{
+    background-color: #f4717a;
 }

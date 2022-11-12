@@ -1,28 +1,28 @@
-<ul>
-  <h2 class="uber-section">Uber</h2>
-  <li *ngFor="let order of uberOrders">
-    Price: {{order.price}}
-    <br>
-    Location: {{order.name}}
-    <br>
-    <br>
-  </li>
-  <br>
-  <h2 class="doordash-section">DoorDash</h2>
-  <li *ngFor="let order of doordashOrders">
-    Price: {{order.price}}
-    <br>
-    Location: {{order.name}}
-    <br>
-    <br>
-  </li>
-  <br>
-  <h2 class="grubhub-section">GrubHub</h2>
-  <li *ngFor="let order of grubhubOrders">
-    Price: {{order.price}}
-    <br>
-    Location: {{order.name}}
-    <br>
-    <br>
-  </li>
+<ul class="order-list">
+  <div class="company-section uber-section">
+    <h2>Uber</h2>
+    <li *ngFor="let order of uberOrders">
+      {{order[0].restaurant}} | {{order[1]}} miles away | ${{order[0].price}}
+      <br>
+      <br>
+    </li>
+  </div>
+
+  <div class="company-section doordash-section">
+    <h2 class="">DoorDash</h2>
+    <li *ngFor="let order of doordashOrders">
+      {{order[0].restaurant}} | {{order[1]}} miles away | ${{order[0].price}}
+      <br>
+      <br>
+    </li>
+  </div>
+
+  <div class="company-section grubhub-section">
+    <h2 class="">GrubHub</h2>
+    <li *ngFor="let order of grubhubOrders">
+      {{order[0].restaurant}} | {{order[1]}} miles away | ${{order[0].price}}
+      <br>
+      <br>
+    </li>
+  </div>
 </ul>
