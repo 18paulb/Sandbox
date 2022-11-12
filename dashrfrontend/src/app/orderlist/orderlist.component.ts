@@ -27,15 +27,15 @@ export class OrderlistComponent implements OnInit {
 
     for (let order of data) {
 
-      if (order.company == "Uber") {
+      if (order.company.toLowerCase() == "uber") {
         this.uberOrders.push(order)
       }
 
-      else if (order.company == "DoorDash") {
+      else if (order.company.toLowerCase() == "doordash") {
         this.doordashOrders.push(order)
       }
 
-      else if (order.company == "GrubHub") {
+      else if (order.company.toLowerCase() == "grubhub") {
         this.grubhubOrders.push(order)
       }
     }
