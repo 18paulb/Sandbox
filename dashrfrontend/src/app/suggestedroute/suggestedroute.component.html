@@ -1,13 +1,15 @@
 
-<ejs-maps id='rn-container' (load)="load($event)" [zoomSettings]="zoomSettings" height="600px" width="1200px" style="display:block;">
+<ejs-maps id='rn-container' (load)="load($event)" [zoomSettings]="zoomSettings" height="600px" width="100%" style="display:block;">
   <e-layers>
     <e-layer [markerSettings]="markerSettings" [navigationLineSettings]="navigationLineSettings"></e-layer>
  </e-layers>
  </ejs-maps>
 
+<div class="display-info">
+  <button class="best-route__button" (click)="helperGetRoute(startingLat, startingLon, orders)">Route</button>
 
-<button (click)="helperGetRoute(startingLat, startingLon, orders)">Route</button>
+  <h1>Predicted Earnings: ${{predictedEarnings}}</h1>
+  <h1>Predicted Time: {{predictedTime}} Minutes</h1>
+  <h1>Distance Travelled: {{distanceTravelled}} Miles</h1>
+</div>
 
-<h1>Predicted Earnings: ${{predictedEarnings}}</h1>
-<h1>Predicted Time: {{predictedTime}} Minutes</h1>
-<h1>Distance Travelled: {{distanceTravelled}} Miles</h1>
